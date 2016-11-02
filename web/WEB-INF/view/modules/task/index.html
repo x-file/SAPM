@@ -1,0 +1,80 @@
+<#include "../../include/_layout.html"/>
+<@layout>
+<div>
+    <ul class="breadcrumb">
+        <li>
+            <a href="#">Home</a>
+        </li>
+        <li>
+            <a href="#">Task</a>
+        </li>
+    </ul>
+</div>
+<div class="row">
+    <div class="box col-md-12">
+        <div class="box-inner">
+            <div class="box-header well" data-original-title="">
+                <h2>任务管理</h2>
+
+                <div class="box-icon">
+                    <a href="#" class="btn btn-setting btn-round btn-default"><i
+                            class="glyphicon glyphicon-cog"></i></a>
+                    <a href="#" class="btn btn-minimize btn-round btn-default"><i
+                            class="glyphicon glyphicon-chevron-up"></i></a>
+                    <a href="#" class="btn btn-close btn-round btn-default"><i
+                            class="glyphicon glyphicon-remove"></i></a>
+                </div>
+            </div>
+            <div class="box-content">
+                <table class="table table-bordered table-striped table-condensed">
+                    <thead>
+                    <tr>
+                        <th>任务</th>
+                        <th>负责人</th>
+                        <th>开始日期</th>
+                        <th>结束日期</th>
+                        <th>状态</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <#list taskPage.getList() as x>
+                        <tr>
+                            <td>${x.name}</td>
+                            <td class="center">${x.person}</td>
+                            <td class="center">${x.beginDate}</td>
+                            <td class="center">
+                                <span class="label-default label label-danger">${x.endDate}</span>
+                            </td>
+                            <td class="center">
+                                <span class="label-success label label-default">完成</span>
+                            </td>
+                        </tr>
+                    </#list>
+                    <tr>
+                        <td>White Horse</td>
+                        <td class="center">Staff</td>
+                        <td class="center">2012/02/01</td>
+                        <td class="center">2012/01/01</td>
+                        <td class="center">
+                            <span class="label-default label label-danger">进行中</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Sheikh Heera</td>
+                        <td class="center">Admin</td>
+                        <td class="center">2012/02/01</td>
+                        <td class="center">2012/02/01</td>
+                        <td class="center">
+                            <span class="label-default label">未开始</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <#include "../../include/_paginate.html"/>
+                <@paginate currentPage=taskPage.pageNumber totalPage=taskPage.totalPage actionUrl="/task/" />
+            </div>
+        </div>
+    </div>
+</div><!--/span-->
+
+</@layout>

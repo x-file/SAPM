@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>video</title>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="/assets/bootstrap-3.3.5/css/bootstrap.min.css">
+    <!-- 可选的Bootstrap主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="/assets/bootstrap-3.3.5/css/bootstrap-theme.min.css">
+
+    <!-- 播放器 -->
+    <script type="text/javascript" src="/assets/ckplayer/ckplayer.js"></script>
+    <style>
+        html, body {
+            margin: 0px;
+            height: 100%;
+        }
+
+        .video-border {
+            border-style: solid;
+            border-width: 2px;
+            border-color: #ffffff;
+        }
+
+        .video-border-color-red {
+            border-style: solid;
+            border-width: 2px;
+            border-color: red;
+        }
+
+        .left-div {
+            background-color: #3c3e40;
+        }
+
+        .man-div {
+            background-color: #2a2a2a;
+        }
+
+        .icon-rotate-45 {
+            -webkit-transform: rotate(45deg);
+            -moz-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            -o-transform: rotate(45deg);
+            transform: rotate(45deg);
+            filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+<div class="container-fluid" style="height:100%;">
+    <div class="row" style="height:100%;">
+
+        <!-- main begin-->
+        <div id="main" class="col-xs-10" style="height:100%;background-color: #131313; ">
+            <!-- video 1/2 row -->
+            <div class="row" style="height:50%;">
+                <div id="video1" data-video="0" data-sceneryid="0" class="col-xs-6" style="color:#ffffff;padding:0px;height: 100%">video1
+                </div>
+                <div id="video2" data-video="0" data-sceneryid="0" class="col-xs-6" style="color:#ffffff;padding:0px;height: 100%">video2
+                </div>
+            </div>
+
+            <!-- video 3/4 row -->
+            <div class="row" style="height:50%;">
+                <div id="video3" data-video="0" data-sceneryid="0" class="col-xs-6" style="color:#ffffff;padding:0px;height: 100%">video3
+                </div>
+                <div id="video4" data-video="0" data-sceneryid="0" class="col-xs-6" style="color:#ffffff;padding:0px;height: 100%">video4
+                </div>
+            </div>
+
+        </div>
+        <!-- main end-->
+        <!-- right
+        <div class="col-xs-2" style="background:#f0f0f0">ctrl</div>-->
+
+        <!-- left -->
+        <div class="col-xs-2" style="height:100%;background-color: #eeeeee;border:3px solid #eeeeee;">
+            <form class="form">
+                <label>景区：</label>
+
+                <div class="form-group">
+                    <select id="scenerySelect" class="form-control">
+                        <option value=""></option>
+                        <#list scenerys as x>
+                            <option value="${x.scenery_id}">${x.scenery}</option>
+                        </#list>
+                    </select>
+                </div>
+
+                <label>摄像点：</label>
+
+                <div id="cam"></div>
+                <hr>
+                <label>控制面板</label>
+
+                <div>
+                    <button id="ctrl_left_top" class="btn btn-default" type="button">
+                        <i class="glyphicon glyphicon-triangle-left icon-rotate-45"></i>
+                    </button>
+                    <button id="ctrl_top" class="btn btn-default glyphicon glyphicon-triangle-top"
+                            type="button"></button>
+                    <button id="ctrl_right_top" class="btn btn-default" type="button">
+                        <i class="glyphicon glyphicon-triangle-top icon-rotate-45"></i>
+                    </button>
+                </div>
+                <div>
+                    <button id="ctrl_left" class="btn btn-default  glyphicon  glyphicon-triangle-left"
+                            type="button"></button>
+                    <button id="ctrl_center" class="btn btn-default glyphicon  glyphicon glyphicon-retweet"
+                            type="button"></button>
+                    <button id="ctrl_right" class="btn btn-default glyphicon  glyphicon-triangle-right"
+                            type="button"></button>
+                </div>
+                <div>
+                    <button id="ctrl_left_bottom" class="btn btn-default" type="button">
+                        <i class="glyphicon glyphicon-triangle-bottom icon-rotate-45"></i>
+                    </button>
+                    <button id="ctrl_bottom" class="btn btn-default glyphicon glyphicon-triangle-bottom"
+                            type="button"></button>
+                    <button id="ctrl_right_bottom" class="btn btn-default" type="button">
+                        <i class="glyphicon glyphicon-triangle-right icon-rotate-45"></i>
+                    </button>
+                </div>
+                <br>
+
+                <div>
+                    <button id="ctrl_zoom_left" class="btn btn-default glyphicon glyphicon-plus" type="button"></button>
+                    <span class="glyphicon glyphicon-zoom-in" style="width: 20px"></span>
+                    <button id="ctrl_zoom_right" class="btn btn-default glyphicon glyphicon-minus"
+                            type="button"></button>
+                </div>
+                <div>
+                    <button id="ctrl_focus_left" class="btn btn-default glyphicon glyphicon-plus"
+                            type="button"></button>
+                    <span class="glyphicon glyphicon-eye-open" style="width: 20px"></span>
+                    <button id="ctrl_focus_right" class="btn btn-default glyphicon glyphicon-minus"
+                            type="button"></button>
+                </div>
+                <div>
+                    <button id="ctrl_iris_left" class="btn btn-default glyphicon glyphicon-plus" type="button"></button>
+                    <span class="glyphicon glyphicon-tree-conifer" style="width: 20px"></span>
+                    <button id="ctrl_iris_right" class="btn btn-default glyphicon glyphicon-minus"
+                            type="button"></button>
+                </div>
+                <hr>
+                <input type="text" id="textId" value="0"/>
+                <input type="text" id="textId2" value="0"/>
+                <input type="text" id="textId3" value="0"/>
+
+
+                <div style="position:absolute;bottom: 5px; text-align: end">
+                    <button id="btn1" type="button" class="btn btn-default glyphicon glyphicon-stop"/>
+                    <button id="btn4" type="button" class="btn btn-default glyphicon glyphicon-th-large"/>
+                    <button id="btn6" type="button" class="btn btn-default glyphicon glyphicon-th-list"/>
+                    <button id="btn9" type="button" class="btn btn-default glyphicon glyphicon-th"/>
+                    <button id="close" type="button" class="btn btn-default glyphicon glyphicon-remove-circle"/>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+</div>
+
+
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="/assets/jquery/jquery.min.js"></script>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="/assets/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="/assets/html.js"></script>
+
+</body>
+</html>

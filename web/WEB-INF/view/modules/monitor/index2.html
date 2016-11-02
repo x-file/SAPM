@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>video</title>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="/assets/bootstrap-3.3.5/css/bootstrap.min.css">
+    <!-- 可选的Bootstrap主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="/assets/bootstrap-3.3.5/css/bootstrap-theme.min.css">
+
+    <!-- 播放器 -->
+    <script type="text/javascript" src="/assets/ckplayer/ckplayer.js"></script>
+    <style>
+        html,body{ margin:0px; height:100%;}
+        .video-border {
+            border-style: solid;
+            border-width: 2px;
+            border-color: #ffffff;
+        }
+
+        .video-border-color-red {
+            border-style: solid;
+            border-width: 2px;
+            border-color: red;
+        }
+
+        .left-div {
+            background-color: #3c3e40;
+        }
+
+        .man-div {
+            background-color: #2a2a2a;
+        }
+
+        .icon-rotate-45 {
+            -webkit-transform: rotate(45deg);
+            -moz-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            -o-transform: rotate(45deg);
+            transform: rotate(45deg);
+            filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+<div class="container-fluid" style="height:100%;">
+    <div class="row" style="height:100%;">
+        <!-- left -->
+        <div class="col-xs-2" style="height:100%;background-color: #ffffff;">
+            <form class="form">
+                <label>景区：</label>
+
+                <div class="form-group">
+                    <select class="form-control">
+                        <option>嵩山少林</option>
+                        <option>龙门石窟</option>
+                        <option>中岳庙</option>
+                        <option>云台山风景区</option>
+                        <option>三皇寨</option>
+                    </select>
+                </div>
+                <hr>
+
+                <label>摄像点：</label>
+
+                <div class="checkbox">
+                    <label><input name="cbox" type="checkbox" id="a">少林寺</label>
+                </div>
+                <div class="checkbox">
+                    <label><input name="cbox" type="checkbox" id="b">白云山</label>
+                </div>
+                <div class="checkbox">
+                    <label><input name="cbox" type="checkbox" id="c">云台山</label>
+                </div>
+                <div class="checkbox">
+                    <label><input name="cbox" type="checkbox" id="d">三皇寨</label>
+                </div>
+                <div class="checkbox">
+                    <label><input name="cbox" type="checkbox" id="e">嵩阳书院</label>
+                </div>
+                <div class="checkbox">
+                    <label><input name="cbox" type="checkbox" id="f">云台山</label>
+                </div>
+                <div class="checkbox">
+                    <label><input name="cbox" type="checkbox" id="g">龙门石窟</label>
+                </div>
+                <div class="checkbox">
+                    <label><input name="cbox" type="checkbox" id="h">四皇寨</label>
+                </div>
+                <div class="checkbox">
+                    <label><input name="cbox" type="checkbox" id="i">清明上河园</label>
+                </div>
+                <div class="checkbox">
+                    <label><input name="cbox" type="checkbox" id="j">中岳庙</label>
+                </div>
+
+                <hr>
+                <label>控制面板</label>
+                <div>
+                    <button class="btn btn-default">
+                        <i class="glyphicon glyphicon-triangle-left icon-rotate-45"></i>
+                    </button>
+                    <button class="btn btn-default glyphicon glyphicon-triangle-top"></button>
+                    <button class="btn btn-default">
+                        <i class="glyphicon glyphicon-triangle-top icon-rotate-45"></i>
+                    </button>
+                </div>
+                <div>
+                    <button class="btn btn-default  glyphicon  glyphicon-triangle-left"></button>
+                    <button class="btn btn-default glyphicon  glyphicon glyphicon-retweet"></button>
+                    <button class="btn btn-default glyphicon  glyphicon-triangle-right"></button>
+                </div>
+                <div>
+                    <button class="btn btn-default">
+                        <i class="glyphicon glyphicon-triangle-bottom icon-rotate-45"></i>
+                    </button>
+                    <button class="btn btn-default glyphicon glyphicon-triangle-bottom"></button>
+                    <button class="btn btn-default">
+                        <i class="glyphicon glyphicon-triangle-right icon-rotate-45"></i>
+                    </button>
+                </div>
+                <br>
+                <div>
+                    <button class="btn btn-default glyphicon glyphicon-plus"></button>
+                    <button class="btn btn-default glyphicon glyphicon-zoom-in"></button>
+                    <button class="btn btn-default glyphicon glyphicon-minus"></button>
+                </div>
+                <div>
+                    <button class="btn btn-default glyphicon glyphicon-plus"></button>
+                    <button class="btn btn-default glyphicon glyphicon-eye-open"></button>
+                    <button class="btn btn-default glyphicon glyphicon-minus"></button>
+                </div>
+                <div>
+                    <button class="btn btn-default glyphicon glyphicon-plus"></button>
+                    <button class="btn btn-default glyphicon glyphicon-tree-conifer"></button>
+                    <button class="btn btn-default glyphicon glyphicon-minus"></button>
+                </div>
+
+
+                <label>风格切换</label>
+
+                <div>
+                    <input id="btn1" type="button" class="btn btn-default" value="1格"/>
+                    <input id="btn4" type="button" class="btn btn-default" value="4格"/>
+                    <input id="btn6" type="button" class="btn btn-default" value="6格"/>
+                    <input id="btn9" type="button" class="btn btn-default" value="9格"/>
+                    <input type="text" id="textId" value=""/>
+                    <input type="text" id="textId2" value=""/>
+                </div>
+
+            </form>
+
+        </div>
+        <!-- main begin-->
+        <div id="main" class="col-xs-10" style="height:100%;background-color: #000000;">
+            <!-- video 1/2 row -->
+            <div class="row">
+                <div class="col-xs-6" style="padding:0">
+                    <!-- video1 -->
+                    <div id="video1" data-video="0"></div>
+                </div>
+                <div class="col-xs-6" style="padding:0">
+                    <!-- video2 -->
+                    <div id="video2" data-video="0"></div>
+                </div>
+            </div>
+
+            <!-- video 3/4 row -->
+            <div class="row">
+                <div class="col-xs-6" style="padding:0">
+                    <!-- video3 -->
+                    <div id="video3" data-video="0"></div>
+                </div>
+                <div class="col-xs-6" style="padding:0">
+                    <!-- video4 -->
+                    <div id="video4" data-video="0"></div>
+                </div>
+            </div>
+
+        </div>
+        <!-- main end-->
+        <!-- right 
+        <div class="col-xs-2" style="background:#f0f0f0">ctrl</div>-->
+    </div>
+</div>
+
+
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="/assets/jquery/jquery.min.js"></script>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="/assets/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+    //摄像机ID
+    var camId;
+    //需要添加播放器的div的ID
+    var divId;
+    //播放器的默认高度
+    var height = 390;
+    //页面上最多可以放多少个播放器(格子数),默认为4格，即4个视频
+    var videoCount = 4;
+    //当前选中的div
+    var selectedDiv = 0;
+    //当前选中div中的视频id
+    var selectedCamId = 0;
+
+    var rtmp = 'rtmp://demo.srs.com/live/livestream';
+    var video = [''];
+    //播放器配置参数
+    var flashvars = {
+        f: rtmp,
+        c: 0,
+        p: 1,
+        b: 0
+    };
+
+
+    $(function () {
+        //调用给播放器所在div添加红色边框的函数
+        $.redborder();
+
+        //复选框点击事件
+        $('input[type=checkbox]').click(function () {
+            //摄像机ID,复选框的value值
+            camId = msg;
+            //1.勾选复选框
+            if ($(this).prop('checked')) {
+
+                //2.获取视频应该再哪个div中打开
+                //3.判断是否“选中”div窗口，(选中即selectedDiv != 0,未选中==0）
+                if (selectedDiv != 0) {
+                    //目标div
+                    divId = selectedDiv;
+                    //点击复选框的时候，把复选框的值(camId) 赋给视频所在的div的data-video属性
+                    $("#" + divId).attr("data-video", camId);
+
+                    //在选中的播放窗口切换视频的时候，将上一个视频的复选框取消勾选
+                    if (selectedCamId != camId) {
+                        $("#" + selectedCamId).attr("checked", false);
+                        selectedCamId = camId;
+                    }
+                    //4.如果没有“选中”div窗口，则计算按顺序应该在哪个div中打开，需要判断显示的视频是否超过当前视频总数
+                } else {
+                    var result = new Array();
+                    //获取选中的checkbox,计算有几个被选中
+                    $('input[name="cbox"]:checked').each(function () {
+                        result.push($(this).val());
+                    });
+                    var str = result.join(',');
+                    if (result.length > videoCount) {
+                        alert('只能选择' + videoCount + '路直播！');
+                        return false;
+                    } else {
+                        var div = $("div[data-video='0']");
+                        //目标div
+                        divId = div.attr("id");
+                        //点击复选框的时候，把复选框的值(camId) 赋给视频所在的div的data-video属性
+                        $("#" + divId).attr("data-video", camId);
+                    }
+                }
+
+
+                $("#textId").val(divId);
+                $("#textId2").val(camId);
+
+
+                var videoNum = $("div[id^='video']").length;
+                //如果播放页面可以显示视频的总数量，height为播放器的高度
+                switch (videoNum) {
+                    case 1:
+                        //最多可放4格视频窗口
+                        videoCount = 1;
+                        height = 800;
+                        break;
+                    case 4:
+                        //最多可放4格视频窗口
+                        videoCount = 4;
+                        break;
+                    case 6:
+                        //最多可放6格视频窗口,调整第一个播放器的大小(第一个video1的高度为524)
+                        videoCount = 6;
+                        if (divId == 'video1')
+                            height = 524;
+                        else
+                            height = 260
+                        break;
+                    case 9:
+                        //最多可放9格视频窗口
+                        videoCount = 9;
+                        break;
+                }
+                CKobject.embed('/assets/ckplayer/ckplayer.swf', divId, 'ckplayer_' + divId, '100%', height, false, flashvars, video);
+
+            } else {
+                //取消勾选后将视频从页面试去除，并将data-video的值赋为0
+                $("div[data-video='" + camId + "']").each(function () {
+                    $("#" + (msg)).empty();
+                    $(this).attr("data-video", 0);
+                    return false;
+                });
+
+
+            }
+
+            //提交选项值
+            $.ajax({
+                type: "POST",
+                url: '/msg',
+                data: "camId=" + camId,
+                dataType: "json",
+                success: function (msg) {
+                    alert(msg);
+                }
+            });
+        });
+
+
+        //不同播放页面的切换4/6/9格
+        $("input[id^='btn']").click(function () {
+            //重置页面参数
+            $.resetVar();
+            if (msg == "btn1") {
+                //播放器高度
+                height = 800;
+                //将复选框都设为false
+                $("input[name='cbox']").attr("checked", false);
+                $("#main").html(
+                        '<!-- video 1 row -->' +
+                        '<div class="row">' +
+                        '<div class="col-xs-12" style="padding:0">' +
+                        '<!-- video1 -->' +
+                        '<div id="video1" data-video="0"></div>' +
+                        '</div>' +
+                        '</div>');
+            } else if (msg == "btn4") {
+                //播放器高度
+                height = 390;
+                //将复选框都设为false
+                $("input[name='cbox']").attr("checked", false);
+                $("#main").html(
+                        '<!-- video 1/2 row -->' +
+                        '<div class="row">' +
+                        '<div class="col-xs-6" style="padding:0">' +
+                        '<!-- video1 -->' +
+                        '<div id="video1" data-video="0"></div>' +
+                        '</div>' +
+                        '<div class="col-xs-6" style="padding:0">' +
+                        '<!-- video2 -->' +
+                        '<div id="video2" data-video="0"></div>' +
+                        '</div>' +
+                        '</div>' +
+
+                        '<!-- video 3/4 row -->' +
+                        '<div class="row">' +
+                        '<div class="col-xs-6" style="padding:0">' +
+                        '<!-- video3 -->' +
+                        '<div id="video3" data-video="0"></div>' +
+                        '</div>' +
+                        '<div class="col-xs-6" style="padding:0">' +
+                        '<!-- video4 -->' +
+                        '<div id="video4" data-video="0"></div>' +
+                        '</div>' +
+                        '</div>');
+            } else if (msg == "btn6") {
+                //播放器高度
+                height = 260;
+                //将复选框都设为false
+                $("input[name='cbox']").attr("checked", false);
+                $("#main").html(
+                        '<!-- video 1 row -->' +
+                        '<div class="row">' +
+                        '<div class="col-xs-8" style="padding:0">' +
+                        '<!-- video1 -->' +
+                        '<div id="video1" data-video="0"></div>' +
+                        '</div>' +
+                        '<div class="col-xs-4" style="padding:0">' +
+                        '<!-- video 2/3 row -->' +
+                        '<!-- video2 -->' +
+                        '<div id="video2" data-video="0"></div>' +
+                        '<!-- video3 -->' +
+                        '<div id="video3" data-video="0"></div>' +
+                        '</div>' +
+                        '</div>' +
+                        '<!-- video 4/5/6 row -->' +
+                        '<div class="row">' +
+                        '<div class="col-xs-4" style="padding:0">' +
+                        '<!-- video4 -->' +
+                        '<div id="video4" data-video="0"></div>' +
+                        '</div>' +
+                        '<div class="col-xs-4" style="padding:0">' +
+                        '<!-- video5 -->' +
+                        '<div id="video5" data-video="0"></div>' +
+                        '</div>' +
+                        '<div class="col-xs-4" style="padding:0">' +
+                        '<!-- video6 -->' +
+                        '<div id="video6" data-video="0"></div>' +
+                        '</div>' +
+                        '</div>');
+            } else if (msg == "btn9") {
+                //播放器高度
+                height = 260;
+                //将复选框都设为false
+                $("input[name='cbox']").attr("checked", false);
+                $("#main").html(
+                        '<!-- video 1/2/3 row -->' +
+                        '<div class="row">' +
+                        '<div class="col-xs-4" style="padding:0">' +
+                        '<!-- video1 -->' +
+                        '<div id="video1" data-video="0"></div>' +
+                        '</div>' +
+                        '<div class="col-xs-4" style="padding:0">' +
+                        '<!-- video2 -->' +
+                        '<div id="video2" data-video="0"></div>' +
+                        '</div>' +
+                        '<div class="col-xs-4" style="padding:0">' +
+                        '<!-- video3 -->' +
+                        '<div id="video3" data-video="0"></div>' +
+                        '</div>' +
+                        '</div>' +
+
+                        '<!-- video 4/5/6 row -->' +
+                        '<div class="row">' +
+                        '<div class="col-xs-4" style="padding:0">' +
+                        '<!-- video4 -->' +
+                        '<div id="video4" data-video="0"></div>' +
+                        '</div>' +
+                        '<div class="col-xs-4" style="padding:0">' +
+                        '<!-- video5 -->' +
+                        '<div id="video5" data-video="0"></div>' +
+                        '</div>' +
+                        '<div class="col-xs-4" style="padding:0">' +
+                        '<!-- video6 -->' +
+                        '<div id="video6" data-video="0"></div>' +
+                        '</div>' +
+                        '</div>' +
+
+                        '<!-- video 7/8/9 row -->' +
+                        '<div class="row">' +
+                        '<div class="col-xs-4" style="padding:0">' +
+                        '<!-- video7 -->' +
+                        '<div id="video7" data-video="0"></div>' +
+                        '</div>' +
+                        '<div class="col-xs-4" style="padding:0">' +
+                        '<!-- video8 -->' +
+                        '<div id="video8" data-video="0"></div>' +
+                        '</div>' +
+                        '<div class="col-xs-4" style="padding:0">' +
+                        '<!-- video9 -->' +
+                        '<div id="video9" data-video="0"></div>' +
+                        '</div>' +
+                        '</div>');
+            }
+            $.redborder();//调用给播放器所在div添加红色边框的函数
+
+
+        });
+
+
+    });
+
+    //自定义函数，给播放器所在div添加边框
+    $.redborder = function () {
+        $("div[id^='video']").addClass("video-border");
+        //点击播放器将边框颜色改为红色
+        $("div[id^='video']").mousedown(function () {
+            if (msg == selectedDiv) {
+                $("div[id^='video']").removeClass("video-border-color-red")
+                $.resetVar();
+            } else {
+                $("div[id^='video']").removeClass("video-border-color-red")
+                $("#" + msg).addClass("video-border-color-red");
+
+                //当前选中div的ID
+                selectedDiv = msg;
+                //当前选中的摄像机的ID
+                selectedCamId = $(this).attr("data-video");
+            }
+            $("#textId").val(selectedDiv);
+            $("#textId2").val(selectedCamId);
+
+        });
+    }
+
+
+    //重置页面参数
+    $.resetVar = function () {
+        //当前选中的div
+        selectedDiv = 0;
+        //当前选中div中的视频id
+        selectedCamId = 0;
+    }
+
+
+</script>
+
+</body>
+</html>
